@@ -1,0 +1,26 @@
+{
+  "name": "arch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hanlakewind/arch.git"
+  },
+  "author": "Han Li",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hanlakewind/arch/issues"
+  },
+  "homepage": "https://github.com/hanlakewind/arch#readme",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "express": "^4.13.4",
+    "jsonwebtoken": "^5.5.4",
+    "mongoose": "^4.3.7",
+    "morgan": "^1.6.1"
+  }
+}
