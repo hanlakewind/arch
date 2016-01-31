@@ -1,8 +1,7 @@
 'use strict';
 
-var settings = require('../../settings.json');
 var mongoose = require('mongoose');
-var bcrypt = require('bcrypt');
+var authService = require('../authentication/service');
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
@@ -35,22 +34,17 @@ userSchema.pre('save', function(next) {
     if(!self.isModified('password')) {
         return next();
     }
-    bcrypt.hash(self.password, settings.SALT_FACTOR, function(error, hash) {
-        if(error) {
-            return next(error);
-        }
+    
+    authService.hashPassword(self.password).then(function(hash) {
         self.password = hash;
         next();
+    }, function(error) {
+        next(error);
     });
 });
 
-userSchema.methods.comparePassword = function(inputPassword, callback) {
-    bcrypt.compare(inputPassword, this.password, function(error, result) {
-        if(error) {
-            return callback(error);
-        }
-        callback(result);
-    });
+userSchema.methods.comparePassword = function(inputPassword) {
+    return authService.comparePassword(inputPassword, this.password);
 }
 
 userSchema.methods.getDto = function() {

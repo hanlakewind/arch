@@ -6,4 +6,8 @@ module.exports = function(app) {
     app.post('/auth/create', function(request, response) {
         controller.createUser(request, response);
     });
+    
+    app.post('/auth/signIn', function(request, response) {
+        controller.getToken(request, response);
+    });
 }

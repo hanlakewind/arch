@@ -1,9 +1,9 @@
 'use strict';
 
+var jwt = require('jsonwebtoken');
 var User = require('../model/user');
 
 module.exports.createUser = function(request, response) {
-    console.log('HERE!!!!' + request.body.firstName);
     var newUser = new User({
         firstName: request.body.firstName,
         lastName: request.body.lastName,
@@ -17,4 +17,27 @@ module.exports.createUser = function(request, response) {
             response.send(result.getDto());
         }
     })
+}
+
+module.exports.getToken = function(request, response) {
+    User.findOne({
+        email: request.body.email
+    }, function(searchError, foundUser) {
+        if(searchError) {
+            return response.status(500).send(searchError);
+        }
+        if(!foundUser) {
+            return response.status(404).send();
+        }
+        
+        foundUser.comparePassword(request.body.password).then(function(result) {
+            if(result) {
+                response.send(result);
+            } else {
+                response.send('Wrong password!');
+            }
+        }, function(compareError) {
+            response.status(500).send(compareError);
+        });
+    });
 }
