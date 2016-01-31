@@ -1,0 +1,5 @@
+{
+  "MONGO_PATH": "mongodb://localhost/arch",
+  "MORGAN_MODE": "dev",
+  "SALT_FACTOR": 10
+}
