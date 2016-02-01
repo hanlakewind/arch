@@ -1,8 +1,21 @@
 'use strict';
 
 var bcrypt = require('bcrypt');
+var jwt = require('jsonwebtoken');
 var Q = require('q');
 var settings = require('../../settings.json');
+var secretKey = require('../../secret.key.json');
+
+var JWT_SIGN_OPTIONS = {
+    algorithm: 'HS256',
+    expiresIn: 3600,
+    issuer: secretKey.JWT_ISSUER
+}
+
+var JWT_VERIFY_OPTIONS = {
+    algorithms: ['HS256'],
+    issuer: secretKey.JWT_ISSUER
+}
 
 module.exports.hashPassword = function(inputPassword) {
     var deferred = Q.defer();
@@ -24,6 +37,19 @@ module.exports.comparePassword = function(inputPassword, userPassword) {
             deferred.reject(error);
         } else {
             deferred.resolve(result);
+        }
+    });
+    
+    return deferred.promise;
+}
+
+module.exports.generateAccessToken = function(userDto) {
+    var deferred = Q.defer();
+    jwt.sign(userDto, secretKey.JWT_SECRET_KEY, JWT_SIGN_OPTIONS, function(token) {
+        if(token) {
+            deferred.resolve(token);
+        } else {
+            deferred.reject();
         }
     });
     

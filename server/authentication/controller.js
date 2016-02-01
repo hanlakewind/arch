@@ -2,6 +2,7 @@
 
 var jwt = require('jsonwebtoken');
 var User = require('../model/user');
+var authService = require('../authentication/service');
 
 module.exports.createUser = function(request, response) {
     var newUser = new User({
@@ -32,9 +33,13 @@ module.exports.getToken = function(request, response) {
         
         foundUser.comparePassword(request.body.password).then(function(result) {
             if(result) {
-                response.send(result);
+                authService.generateAccessToken(foundUser.getDto()).then(function(token) {
+                    response.send(token);
+                }, function() {
+                    response.status(500).send('Cannot generate access token.');
+                });
             } else {
-                response.send('Wrong password!');
+                response.status(401).send('Wrong password!');
             }
         }, function(compareError) {
             response.status(500).send(compareError);

@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use(morgan(settings.MORGAN_MODE));
 
 // Routes
-var authenticationRoute = require('./app/authentication/route')(app);
+var authenticationRoute = require('./server/authentication/route')(app);
 
 // Mongodb
 mongoose.connect(settings.MONGO_PATH);
