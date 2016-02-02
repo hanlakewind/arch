@@ -55,3 +55,7 @@ module.exports.generateAccessToken = function(userDto) {
     
     return deferred.promise;
 }
+
+module.exports.verifyAccessToken = function(accessToken) {
+    
+}
