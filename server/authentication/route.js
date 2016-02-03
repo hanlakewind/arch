@@ -10,4 +10,8 @@ module.exports = function(app) {
     app.post('/auth/signIn', function(request, response) {
         controller.getToken(request, response);
     });
+    
+    app.get('/auth/user', function(request, response) {
+        
+    });
 };
