@@ -8,14 +8,14 @@ var secretKey = require('../../secret.key.json');
 
 var JWT_SIGN_OPTIONS = {
     algorithm: 'HS256',
-    expiresIn: 3600,
+    expiresIn: 1800,
     issuer: secretKey.JWT_ISSUER
-}
+};
 
 var JWT_VERIFY_OPTIONS = {
     algorithms: ['HS256'],
     issuer: secretKey.JWT_ISSUER
-}
+};
 
 module.exports.hashPassword = function(inputPassword) {
     var deferred = Q.defer();
@@ -28,7 +28,7 @@ module.exports.hashPassword = function(inputPassword) {
     });
     
     return deferred.promise;
-}
+};
 
 module.exports.comparePassword = function(inputPassword, userPassword) {
     var deferred = Q.defer();
@@ -41,7 +41,7 @@ module.exports.comparePassword = function(inputPassword, userPassword) {
     });
     
     return deferred.promise;
-}
+};
 
 module.exports.generateAccessToken = function(userDto) {
     var deferred = Q.defer();
@@ -54,8 +54,17 @@ module.exports.generateAccessToken = function(userDto) {
     });
     
     return deferred.promise;
-}
+};
 
 module.exports.verifyAccessToken = function(accessToken) {
+    var deferred = Q.defer();
+    jwt.verify(accessToken, secretKey.JWT_SECRET_KEY, JWT_VERIFY_OPTIONS, function(error, decoded) {
+        if(error) {
+            deferred.reject(error);
+        } else {
+            deferred.resolve(decoded);
+        }
+    });
     
-}
+    return deferred.promise;
+};

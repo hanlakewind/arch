@@ -18,7 +18,7 @@ module.exports.createUser = function(request, response) {
             response.send(result.getDto());
         }
     })
-}
+};
 
 module.exports.getToken = function(request, response) {
     User.findOne({
@@ -45,4 +45,4 @@ module.exports.getToken = function(request, response) {
             response.status(500).send(compareError);
         });
     });
-}
+};
