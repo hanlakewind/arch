@@ -15,7 +15,6 @@ var foodSchema = new Schema({
         required: true
     },
     gramsPerServing: Number,
-    foodClass: ObjectId,
     foodCategory: ObjectId,
     detail: String,
     description: String
