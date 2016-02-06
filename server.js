@@ -4,7 +4,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
-var settings = require('./settings.json');
+var settings = require('./settings');
 
 // Encoding and morgan
 var app = express();

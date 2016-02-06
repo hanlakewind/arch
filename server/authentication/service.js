@@ -3,7 +3,7 @@
 var bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 var Q = require('q');
-var settings = require('../../settings.json');
+var settings = require('../../settings');
 var secretKey = require('../../secret.key.json');
 
 var JWT_SIGN_OPTIONS = {
