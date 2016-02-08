@@ -17,7 +17,7 @@ module.exports.createUser = function(request, response) {
         } else {
             response.send(result.getDto());
         }
-    })
+    });
 };
 
 module.exports.getToken = function(request, response) {

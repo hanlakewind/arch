@@ -5,16 +5,13 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.Types.ObjectId;
 
 var foodCategorySchema = new Schema({
-    _id: {
-        type: ObjectId,
-        required: true
-    },
     foodCategoryName: {
         type: String,
         lowercase: true,
         required: true
     },
     foodClass: ObjectId,
+    foods: [ObjectId],
     detail: String,
     description: String
 });
