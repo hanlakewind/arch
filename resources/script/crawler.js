@@ -67,6 +67,6 @@ module.exports.loadCategories = function() {
 function categoryParser(dataString) {
     var categoryStrings = dataString.split('\n');
     categoryStrings.forEach(function(categoryString) {
-        
+        var categoryName = categoryString.split('~')[2];
     });
 }
