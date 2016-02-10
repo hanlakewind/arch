@@ -4,6 +4,7 @@ var fs = require('fs');
 var Q = require('q');
 var settings = require('../../settings');
 var FoodClass = require(settings.ROOT_PATH + '/server/model/foodClass');
+var FoodCategory = require(settings.ROOT_PATH + '/server/model/foodCategory');
 
 module.exports.loadClasses = function() {
     var meat = new FoodClass({
@@ -68,5 +69,8 @@ function categoryParser(dataString) {
     var categoryStrings = dataString.split('\n');
     categoryStrings.forEach(function(categoryString) {
         var categoryName = categoryString.split('~')[2];
+        var newFoodCategory = new FoodCategory({
+            
+        });
     });
 }
