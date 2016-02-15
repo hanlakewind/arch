@@ -12,9 +12,7 @@ module.exports.createFood = function(request, response) {
         if(error) {
             return request.status(500).send(error);
         } else {
-            var newFood = new Food({
-                
-            });
+
         }
     });
 };
