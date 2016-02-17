@@ -16,3 +16,7 @@ module.exports.createFood = function(request, response) {
         }
     });
 };
+
+module.exports.getAllFood = function(request, response) {
+    
+};
